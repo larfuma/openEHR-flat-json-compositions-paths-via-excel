@@ -1,5 +1,5 @@
 let
-    Quelle = Json.Document(Web.Contents("=LEFT(CELL(“filename”);FIND(“[“;CELL(“filename”))-1)&”vamappingtemplate.json”")),
+    Quelle = Json.Document(File.Contents("C:\Users\Beep Beep\Downloads\vamappingtemplate (1).json")),
     Tree = Quelle[tree],
 
     FlattenTree = (current_node as record, current_path as text) as table =>
@@ -34,16 +34,22 @@ let
                         [Path = NewPath & "|magnitude", Type = RMType],
                         [Path = NewPath & "|unit", Type = RMType]
                     }
-                else if RMType = "DV_COUNT" or RMType = "DV_INTEGER" or RMType = "DV_DATE_TIME" then
+                else if RMType = "DV_PROPORTION" then
+                    {
+                        [Path = NewPath & "|numerator", Type = RMType],
+                        [Path = NewPath & "|denominator", Type = RMType],
+                        [Path = NewPath & "|type", Type = RMType]
+                    }
+                else if RMType = "DV_COUNT" or RMType = "DV_INTEGER" or RMType = "DV_DATE_TIME" or RMType = "DV_TEXT" then
                     {
                         [Path = NewPath, Type = RMType]
                     }
                 else 
-                    {}, // Structural nodes (CLUSTER, etc.) don't get attributes directly
+                    {}, 
 
             AttributeTable = if List.IsEmpty(AttributeList) then #table({},{}) else Table.FromRecords(AttributeList),
 
-            // 5. Structural Row (The "Parent" entry)
+            // 5. Structural Row
             CurrentRow = #table(
                 {"Path", "Node_Name", "at_Code", "Type", "Max_Occ"}, 
                 {{NewPath, NodeName, AtCode, RMType, if MaxOcc = -1 then "Unbounded" else Text.From(MaxOcc)}}
