@@ -1,0 +1,2259 @@
+{
+  "templateId" : "vamappingtemplate",
+  "semVer" : "10.0.0",
+  "version" : "2.3",
+  "defaultLanguage" : "en",
+  "languages" : [ "en" ],
+  "tree" : {
+    "id" : "vatemplate",
+    "name" : "VAtemplate",
+    "localizedName" : "VAtemplate",
+    "rmType" : "COMPOSITION",
+    "nodeId" : "openEHR-EHR-COMPOSITION.encounter.v1",
+    "min" : 1,
+    "max" : 1,
+    "localizedNames" : {
+      "en" : "VAtemplate"
+    },
+    "localizedDescriptions" : {
+      "en" : "Interaction, contact or care event between a subject of care and healthcare provider(s)."
+    },
+    "aqlPath" : "",
+    "children" : [ {
+      "id" : "context",
+      "rmType" : "EVENT_CONTEXT",
+      "nodeId" : "",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/context",
+      "children" : [ {
+        "id" : "start_time",
+        "name" : "Start_time",
+        "rmType" : "DV_DATE_TIME",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/context/start_time",
+        "inputs" : [ {
+          "type" : "DATETIME"
+        } ],
+        "inContext" : true
+      }, {
+        "id" : "setting",
+        "name" : "Setting",
+        "rmType" : "DV_CODED_TEXT",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/context/setting",
+        "inputs" : [ {
+          "suffix" : "code",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "value",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "visual_acuity_test",
+      "name" : "Visual acuity test",
+      "localizedName" : "Visual acuity test",
+      "rmType" : "OBSERVATION",
+      "nodeId" : "openEHR-EHR-OBSERVATION.visual_acuity.v0",
+      "min" : 0,
+      "max" : 1,
+      "localizedNames" : {
+        "en" : "Visual acuity test"
+      },
+      "localizedDescriptions" : {
+        "en" : "A test to quantify an individual's ability to resolve small objects as a measure of the clarity or sharpness of vision."
+      },
+      "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]",
+      "children" : [ {
+        "id" : "any_event",
+        "name" : "Any event",
+        "localizedName" : "Any event",
+        "rmType" : "POINT_EVENT",
+        "nodeId" : "at0134",
+        "min" : 0,
+        "max" : -1,
+        "localizedNames" : {
+          "en" : "Any event"
+        },
+        "localizedDescriptions" : {
+          "en" : "Default, unspecified point in time or interval event which may be explicitly defined in a template or at run-time."
+        },
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]",
+        "children" : [ {
+          "id" : "eye_examined",
+          "name" : "Eye examined",
+          "localizedName" : "Eye examined",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0007",
+          "min" : 1,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Eye examined"
+          },
+          "localizedDescriptions" : {
+            "en" : "The eye which is being examined, or both eyes in case of a binocular test."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0007]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0012",
+              "label" : "Left eye",
+              "localizedLabels" : {
+                "en" : "Left eye"
+              },
+              "localizedDescriptions" : {
+                "en" : "The left eye was examined."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::726675003]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            }, {
+              "value" : "at0013",
+              "label" : "Right eye",
+              "localizedLabels" : {
+                "en" : "Right eye"
+              },
+              "localizedDescriptions" : {
+                "en" : "The right eye was examined."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::726680007]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            }, {
+              "value" : "at0014",
+              "label" : "Both eyes simultaneously",
+              "localizedLabels" : {
+                "en" : "Both eyes simultaneously"
+              },
+              "localizedDescriptions" : {
+                "en" : "Both eyes were examined simultaneously, typically to assess binocular visual acuity."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::362508001]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            } ]
+          } ]
+        }, {
+          "id" : "result",
+          "name" : "Result",
+          "localizedName" : "Result",
+          "rmType" : "CLUSTER",
+          "nodeId" : "at0461",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Result"
+          },
+          "localizedDescriptions" : {
+            "en" : "Only one of the contained elements should be used per visual acuity test. "
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]",
+          "children" : [ {
+            "id" : "qualitative_result",
+            "name" : "Qualitative result",
+            "localizedName" : "Qualitative result",
+            "rmType" : "DV_CODED_TEXT",
+            "nodeId" : "at0151",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Qualitative result"
+            },
+            "localizedDescriptions" : {
+              "en" : "Measures of visual acuity that are qualitative, rather than quantitative."
+            },
+            "annotations" : {
+              "comment" : "Light Projection testing is not a VA test, use OBSERVATION.light_projection_test.v0 instead.\n\n\n\n"
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0151]/value",
+            "inputs" : [ {
+              "suffix" : "code",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0152",
+                "label" : "Hand movement",
+                "localizedLabels" : {
+                  "en" : "Hand movement"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The individual perceived hand movements."
+                },
+                "termBindings" : {
+                  "SNOMED-CT" : {
+                    "value" : "[SNOMED-CT::260295004]",
+                    "terminologyId" : "SNOMED-CT"
+                  }
+                }
+              }, {
+                "value" : "at0153",
+                "label" : "Count fingers",
+                "localizedLabels" : {
+                  "en" : "Count fingers"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The individual correctly counted fingers."
+                },
+                "termBindings" : {
+                  "LOINC" : {
+                    "value" : "[LOINC::LA24679-5]",
+                    "terminologyId" : "LOINC"
+                  }
+                }
+              }, {
+                "value" : "at0154",
+                "label" : "Light perception",
+                "localizedLabels" : {
+                  "en" : "Light perception"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The individual correnctly identified the absence or presence of light."
+                },
+                "termBindings" : {
+                  "SNOMED-CT" : {
+                    "value" : "[SNOMED-CT::260296003]",
+                    "terminologyId" : "SNOMED-CT"
+                  }
+                }
+              }, {
+                "value" : "at0161",
+                "label" : "No light perception",
+                "localizedLabels" : {
+                  "en" : "No light perception"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The individual was unable to identify the absence or presence of light."
+                },
+                "termBindings" : {
+                  "SNOMED-CT" : {
+                    "value" : "[SNOMED-CT::63063006]",
+                    "terminologyId" : "SNOMED-CT"
+                  }
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "meter_snellen_ratio_result",
+            "name" : "Meter snellen ratio result",
+            "localizedName" : "Meter snellen ratio result",
+            "rmType" : "DV_PROPORTION",
+            "nodeId" : "at0295",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Meter snellen ratio result"
+            },
+            "localizedDescriptions" : {
+              "en" : "Snellen Ratio in meters, where the numerator is the (equivalent or real) testing distance in meters and the denominator is the distance in meters at which the spatial pattern would be separated by a visual angle of one minute of arc. This means the denominator is the distance in meters at which a person with 6/6 visual acuity could still read the line.\n"
+            },
+            "annotations" : {
+              "comment" : "Often used with the standard of 6 meters (6/x), which may  or may not be the real testing distance. \nWhen M Notation is used, the nominator is also the real testing distance."
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0295]/value",
+            "proportionTypes" : [ "ratio", "fraction" ],
+            "inputs" : [ {
+              "suffix" : "numerator",
+              "type" : "DECIMAL"
+            }, {
+              "suffix" : "denominator",
+              "type" : "DECIMAL"
+            } ]
+          }, {
+            "id" : "logmar_result",
+            "name" : "logMAR result",
+            "localizedName" : "logMAR result",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0297",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "logMAR result"
+            },
+            "localizedDescriptions" : {
+              "en" : "Base-10 Logarithm of the minimum angle of resolution. "
+            },
+            "annotations" : {
+              "comment" : "This notation used in the majority of scientific publications. When users enter visual acuity test results using decimal numbers, such as 0.5,  it needs to be ensured that the intended notation (decimal, logMAR or others) is known to both the user and the software, and the appropriate element is used. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0297]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL"
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT"
+            } ]
+          }, {
+            "id" : "decimal_notation_result",
+            "name" : "Decimal notation result",
+            "localizedName" : "Decimal notation result",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0294",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Decimal notation result"
+            },
+            "localizedDescriptions" : {
+              "en" : "Notation commonly used in Europe, defined as the reciprocal of the minimum agle of resolution in arc minutes. "
+            },
+            "annotations" : {
+              "comment" : "Can be calculating by dividing the snellen ratio's numerator by its denominator. When users enter visual acuity test results using decimal numbers, such as 0.5,  it needs to be ensured that the intended notation (decimal, logMAR or others) is known to both the user and the software, and the appropriate element is used. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0294]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL"
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT"
+            } ]
+          }, {
+            "id" : "n_font_size_notation_result",
+            "name" : "N font size notation result",
+            "localizedName" : "N font size notation result",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0299",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "N font size notation result"
+            },
+            "localizedDescriptions" : {
+              "en" : "N font size of the smallest recognized line or text."
+            },
+            "annotations" : {
+              "comment" : "Strictly not a unit of visual acuity but a measure of symbol size commonly used in near vision testing.  A known testing distance is required to estimate the visual angle, 30-40cm is typical for reading distances. \n"
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0299]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL"
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT"
+            } ]
+          }, {
+            "id" : "etdrs_letter_score",
+            "name" : "ETDRS letter score",
+            "localizedName" : "ETDRS letter score",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0356",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "ETDRS letter score"
+            },
+            "localizedDescriptions" : {
+              "en" : "The number of optotypes correctly identified by the patient on a logMAR/ETDRS Chart, including those that are presumed to be readable due to being larger than the smallest line that was read entirely. This includes letters presumed readable at 1m distance. "
+            },
+            "annotations" : {
+              "comment" : "Commonly used in study settings. This score describes either the number of optotypes identified (letters read): \n1. Out of 30 at 1m distance. \nOr\n2. Out of 70 at 4m distance. In which case the 30 letters from the 1m distance are added to the result as they are presumed readable.\n\nAn ETDRS letter score of 85 is equivalent to 20/20, 1.0 decimal, 0.0 logMAR. \nConversion of this notation requires understanding of testing procedures and intended meaning. \n"
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0356]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL"
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT"
+            } ]
+          }, {
+            "id" : "jaeger_font_size_notation_result",
+            "name" : "Jaeger font size notation result",
+            "localizedName" : "Jaeger font size notation result",
+            "rmType" : "DV_ORDINAL",
+            "nodeId" : "at0302",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Jaeger font size notation result"
+            },
+            "localizedDescriptions" : {
+              "en" : "Jaeger font size of the smallest recognized line or text."
+            },
+            "annotations" : {
+              "comment" : "The Jaeger font sizes denoted by the same number are known to vary from card to card. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0302]/value",
+            "inputs" : [ {
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0440",
+                "label" : "J1",
+                "localizedLabels" : {
+                  "en" : "J1"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 1
+              }, {
+                "value" : "at0441",
+                "label" : "J2",
+                "localizedLabels" : {
+                  "en" : "J2"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 2
+              }, {
+                "value" : "at0442",
+                "label" : "J3",
+                "localizedLabels" : {
+                  "en" : "J3"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 3
+              }, {
+                "value" : "at0443",
+                "label" : "J4",
+                "localizedLabels" : {
+                  "en" : "J4"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 4
+              }, {
+                "value" : "at0444",
+                "label" : "J5",
+                "localizedLabels" : {
+                  "en" : "J5"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 5
+              }, {
+                "value" : "at0445",
+                "label" : "J6",
+                "localizedLabels" : {
+                  "en" : "J6"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 6
+              }, {
+                "value" : "at0446",
+                "label" : "J7",
+                "localizedLabels" : {
+                  "en" : "J7"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 7
+              }, {
+                "value" : "at0447",
+                "label" : "J8",
+                "localizedLabels" : {
+                  "en" : "J8"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 8
+              }, {
+                "value" : "at0448",
+                "label" : "J9",
+                "localizedLabels" : {
+                  "en" : "J9"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 9
+              }, {
+                "value" : "at0449",
+                "label" : "J10",
+                "localizedLabels" : {
+                  "en" : "J10"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 10
+              }, {
+                "value" : "at0450",
+                "label" : "J11",
+                "localizedLabels" : {
+                  "en" : "J11"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 11
+              }, {
+                "value" : "at0451",
+                "label" : "J12",
+                "localizedLabels" : {
+                  "en" : "J12"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 12
+              }, {
+                "value" : "at0452",
+                "label" : "J13",
+                "localizedLabels" : {
+                  "en" : "J13"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 13
+              }, {
+                "value" : "at0453",
+                "label" : "J14",
+                "localizedLabels" : {
+                  "en" : "J14"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 14
+              }, {
+                "value" : "at0454",
+                "label" : "J15",
+                "localizedLabels" : {
+                  "en" : "J15"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 15
+              }, {
+                "value" : "at0455",
+                "label" : "J16",
+                "localizedLabels" : {
+                  "en" : "J16"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 16
+              }, {
+                "value" : "at0456",
+                "label" : "J17",
+                "localizedLabels" : {
+                  "en" : "J17"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 17
+              }, {
+                "value" : "at0457",
+                "label" : "J18",
+                "localizedLabels" : {
+                  "en" : "J18"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 18
+              }, {
+                "value" : "at0458",
+                "label" : "J19",
+                "localizedLabels" : {
+                  "en" : "J19"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 19
+              }, {
+                "value" : "at0459",
+                "label" : "J20",
+                "localizedLabels" : {
+                  "en" : "J20"
+                },
+                "localizedDescriptions" : {
+                  "en" : ""
+                },
+                "ordinal" : 20
+              } ]
+            } ]
+          }, {
+            "id" : "derived_result",
+            "name" : "Derived Result",
+            "localizedName" : "Derived Result",
+            "rmType" : "CLUSTER",
+            "nodeId" : "at0193",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Derived Result"
+            },
+            "localizedDescriptions" : {
+              "en" : ""
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0193]",
+            "children" : [ {
+              "id" : "derived_logmar_result",
+              "name" : "Derived logMAR result",
+              "localizedName" : "Derived logMAR result",
+              "rmType" : "DV_QUANTITY",
+              "nodeId" : "at0322",
+              "min" : 0,
+              "max" : 1,
+              "localizedNames" : {
+                "en" : "Derived logMAR result"
+              },
+              "localizedDescriptions" : {
+                "en" : "Base-10 Logarithm of the Minimum Angle of resolution."
+              },
+              "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0461]/items[at0193]/items[at0322]/value",
+              "inputs" : [ {
+                "suffix" : "magnitude",
+                "type" : "DECIMAL"
+              }, {
+                "suffix" : "unit",
+                "type" : "CODED_TEXT"
+              } ]
+            } ]
+          } ]
+        }, {
+          "id" : "letters_missed_in_or_read_in_addition_to_scored_line",
+          "name" : "Letters missed in or read in addition to scored line",
+          "localizedName" : "Letters missed in or read in addition to scored line",
+          "rmType" : "ELEMENT",
+          "nodeId" : "at0410",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Letters missed in or read in addition to scored line"
+          },
+          "localizedDescriptions" : {
+            "en" : "Negative:  Number of Letters missed in the smallest line that was recorded as being successfully read. Positive: Letters correctly identified in the largest line that was not successfully read. Coded values refer to concept of \"partially\" read line. "
+          },
+          "annotations" : {
+            "comment" : "Line-based scoring means lines are scored in their entirety based on whether a certain threshhold (typically 50 or 60%) of their letters were read corretly. Based on this scoring method, it is correct to note the smallest line where that threshold was reached as the visual acuity grade and that is what is expected based on ISO standards. Some persons and institutions additionally record the number of missed letters in the smallest scored line (negative count), the fact that there were missed letters in the smallest scored line (partial) or the number or letters read beyond the smallest scored line  (positive count). "
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0410]",
+          "children" : [ {
+            "id" : "count_value",
+            "localizedName" : "Letters missed in or read in addition to scored line",
+            "rmType" : "DV_COUNT",
+            "nodeId" : "",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Letters missed in or read in addition to scored line"
+            },
+            "localizedDescriptions" : {
+              "en" : "Negative:  Number of Letters missed in the smallest line that was recorded as being successfully read. Positive: Letters correctly identified in the largest line that was not successfully read. Coded values refer to concept of \"partially\" read line. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0410]/value",
+            "inputs" : [ {
+              "type" : "INTEGER",
+              "validation" : {
+                "range" : {
+                  "minOp" : ">=",
+                  "min" : -9,
+                  "maxOp" : "<=",
+                  "max" : 9
+                }
+              }
+            } ]
+          }, {
+            "id" : "coded_text_value",
+            "localizedName" : "Letters missed in or read in addition to scored line",
+            "rmType" : "DV_CODED_TEXT",
+            "nodeId" : "",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Letters missed in or read in addition to scored line"
+            },
+            "localizedDescriptions" : {
+              "en" : "Negative:  Number of Letters missed in the smallest line that was recorded as being successfully read. Positive: Letters correctly identified in the largest line that was not successfully read. Coded values refer to concept of \"partially\" read line. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0410]/value",
+            "inputs" : [ {
+              "suffix" : "code",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0411",
+                "label" : "partial",
+                "localizedLabels" : {
+                  "en" : "partial"
+                },
+                "localizedDescriptions" : {
+                  "en" : "Some symbols were not read correctly in the smallest line that was scored as being successully read, which is not unusual as the line being scored as correct requires 50 or 60% of symbols being identified correctly. Not actually part of line-based scoring, and a bit controversial but commonly used anyway."
+                }
+              } ]
+            } ]
+          } ]
+        }, {
+          "id" : "testing_distance_category",
+          "name" : "Testing distance category",
+          "localizedName" : "Testing distance category",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0081",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Testing distance category"
+          },
+          "localizedDescriptions" : {
+            "en" : "An ordinal measure of testing distance"
+          },
+          "annotations" : {
+            "comment" : "Ideally to be used in conjunction with the quantitative element for testing distance. "
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0081]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0223",
+              "label" : "Near",
+              "localizedLabels" : {
+                "en" : "Near"
+              },
+              "localizedDescriptions" : {
+                "en" : "The test was performed at near distance, which typically refers to a distance below 50cm. There is no generally agreed cutoff."
+              }
+            }, {
+              "value" : "at0224",
+              "label" : "Intermediate",
+              "localizedLabels" : {
+                "en" : "Intermediate"
+              },
+              "localizedDescriptions" : {
+                "en" : "The test was performed at intermediate distance, which typically refers to distances between 50cm and 2 Meters. There are no generally agreed cutoffs."
+              }
+            }, {
+              "value" : "at0225",
+              "label" : "Far",
+              "localizedLabels" : {
+                "en" : "Far"
+              },
+              "localizedDescriptions" : {
+                "en" : "The test was performed at far distance, which typically refers to distances at or above 4 meters, without a generally accepted cutoff."
+              }
+            } ]
+          } ],
+          "termBindings" : {
+            "SNOMED-CT" : {
+              "value" : "[SNOMED-CT::252124009]",
+              "terminologyId" : "SNOMED-CT"
+            }
+          }
+        }, {
+          "id" : "testing_distance",
+          "name" : "Testing distance",
+          "localizedName" : "Testing distance",
+          "rmType" : "DV_QUANTITY",
+          "nodeId" : "at0412",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Testing distance"
+          },
+          "localizedDescriptions" : {
+            "en" : "The distance between the tested eye and the apparent location of the stimulus. "
+          },
+          "annotations" : {
+            "comment" : "The stimulus may be a virtual image."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0412]/value",
+          "inputs" : [ {
+            "suffix" : "magnitude",
+            "type" : "DECIMAL"
+          }, {
+            "suffix" : "unit",
+            "type" : "CODED_TEXT"
+          } ]
+        }, {
+          "id" : "stimulus_display_method",
+          "name" : "Stimulus display method",
+          "localizedName" : "Stimulus display method",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0226",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Stimulus display method"
+          },
+          "localizedDescriptions" : {
+            "en" : "A general categorization of testing methods."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0226]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0231",
+              "label" : "Printed chart or card",
+              "localizedLabels" : {
+                "en" : "Printed chart or card"
+              },
+              "localizedDescriptions" : {
+                "en" : "A printed chart or card was used."
+              }
+            }, {
+              "value" : "at0227",
+              "label" : "Electronic chart display",
+              "localizedLabels" : {
+                "en" : "Electronic chart display"
+              },
+              "localizedDescriptions" : {
+                "en" : "An electronic display was used."
+              }
+            }, {
+              "value" : "at0404",
+              "label" : "Projected chart",
+              "localizedLabels" : {
+                "en" : "Projected chart"
+              },
+              "localizedDescriptions" : {
+                "en" : "A chart projector was used."
+              }
+            }, {
+              "value" : "at0471",
+              "label" : "Physical object",
+              "localizedLabels" : {
+                "en" : "Physical object"
+              },
+              "localizedDescriptions" : {
+                "en" : "Physical objects other than Charts or Cards were used,"
+              }
+            }, {
+              "value" : "at0490",
+              "label" : "Integrated virtual chart display",
+              "localizedLabels" : {
+                "en" : "Integrated virtual chart display"
+              },
+              "localizedDescriptions" : {
+                "en" : "A chart presented as a virtual image inside a device, such as an autorefractor."
+              }
+            } ]
+          } ]
+        }, {
+          "id" : "chart_or_card_type",
+          "name" : "Chart or card type",
+          "localizedName" : "Chart or card type",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0023",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Chart or card type"
+          },
+          "localizedDescriptions" : {
+            "en" : "The specific  chart or card method used to measure visual acuity."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0023]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0082",
+              "label" : "logMAR chart",
+              "localizedLabels" : {
+                "en" : "logMAR chart"
+              },
+              "localizedDescriptions" : {
+                "en" : "A logMAR chart was used."
+              }
+            }, {
+              "value" : "at0083",
+              "label" : "Snellen chart",
+              "localizedLabels" : {
+                "en" : "Snellen chart"
+              },
+              "localizedDescriptions" : {
+                "en" : "A Snellen chart was used."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::400913005]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            }, {
+              "value" : "at0084",
+              "label" : "ETDRS chart",
+              "localizedLabels" : {
+                "en" : "ETDRS chart"
+              },
+              "localizedDescriptions" : {
+                "en" : "An ETDRS chart was used."
+              },
+              "termBindings" : {
+                "SNOMED-CT" : {
+                  "value" : "[SNOMED-CT::400914004]",
+                  "terminologyId" : "SNOMED-CT"
+                }
+              }
+            }, {
+              "value" : "at0477",
+              "label" : "ETDRS original series chart 1",
+              "localizedLabels" : {
+                "en" : "ETDRS original series chart 1"
+              },
+              "localizedDescriptions" : {
+                "en" : "An ETDRS original series chart 1 was used."
+              }
+            }, {
+              "value" : "at0478",
+              "label" : "ETDRS original series chart 2",
+              "localizedLabels" : {
+                "en" : "ETDRS original series chart 2"
+              },
+              "localizedDescriptions" : {
+                "en" : "An ETDRS original series chart 2 was used."
+              }
+            }, {
+              "value" : "at0482",
+              "label" : "ETDRS original series chart R",
+              "localizedLabels" : {
+                "en" : "ETDRS original series chart R"
+              },
+              "localizedDescriptions" : {
+                "en" : "An ETDRS original series chart R was used."
+              }
+            }, {
+              "value" : "at0479",
+              "label" : "ETDRS revised series chart 1",
+              "localizedLabels" : {
+                "en" : "ETDRS revised series chart 1"
+              },
+              "localizedDescriptions" : {
+                "en" : "An ETDRS revised series chart 1 was used."
+              }
+            }, {
+              "value" : "at0480",
+              "label" : "ETDRS revised series chart 2",
+              "localizedLabels" : {
+                "en" : "ETDRS revised series chart 2"
+              },
+              "localizedDescriptions" : {
+                "en" : "An ETDRS revised series chart 2 was used."
+              }
+            }, {
+              "value" : "at0481",
+              "label" : "ETDRS revised series chart 3",
+              "localizedLabels" : {
+                "en" : "ETDRS revised series chart 3"
+              },
+              "localizedDescriptions" : {
+                "en" : "An ETDRS revised series chart 3 was used."
+              }
+            }, {
+              "value" : "at0239",
+              "label" : "Golovin-Sitsev table",
+              "localizedLabels" : {
+                "en" : "Golovin-Sitsev table"
+              },
+              "localizedDescriptions" : {
+                "en" : "A Golovin-Sitsev table was used."
+              }
+            }, {
+              "value" : "at0240",
+              "label" : "Monoyer chart",
+              "localizedLabels" : {
+                "en" : "Monoyer chart"
+              },
+              "localizedDescriptions" : {
+                "en" : "A monoyer visual acuity chart was used."
+              }
+            }, {
+              "value" : "at0241",
+              "label" : "Cardiff acuity cards",
+              "localizedLabels" : {
+                "en" : "Cardiff acuity cards"
+              },
+              "localizedDescriptions" : {
+                "en" : "Cardiff acuity cards were used."
+              }
+            }, {
+              "value" : "at0242",
+              "label" : "Keeler acuity cards",
+              "localizedLabels" : {
+                "en" : "Keeler acuity cards"
+              },
+              "localizedDescriptions" : {
+                "en" : "Keeler acuity cards were used."
+              }
+            }, {
+              "value" : "at0243",
+              "label" : "Teller acutity cards",
+              "localizedLabels" : {
+                "en" : "Teller acutity cards"
+              },
+              "localizedDescriptions" : {
+                "en" : "Teller acuity cards were used."
+              }
+            }, {
+              "value" : "at0472",
+              "label" : "Berkeley rudimentary vision test",
+              "localizedLabels" : {
+                "en" : "Berkeley rudimentary vision test"
+              },
+              "localizedDescriptions" : {
+                "en" : "Berkeley rudimentary vision test was used. Note that white field projection or black/white discrimination is not a measure of VA."
+              }
+            }, {
+              "value" : "at0473",
+              "label" : "Near reading card",
+              "localizedLabels" : {
+                "en" : "Near reading card"
+              },
+              "localizedDescriptions" : {
+                "en" : "A near card with segments of text that are read by the individual was used."
+              }
+            }, {
+              "value" : "at0474",
+              "label" : "LEA grating acuity test",
+              "localizedLabels" : {
+                "en" : "LEA grating acuity test"
+              },
+              "localizedDescriptions" : {
+                "en" : "LEA gratings, a type of preferential looking test was used."
+              }
+            }, {
+              "value" : "at0475",
+              "label" : "Teller acuity cards",
+              "localizedLabels" : {
+                "en" : "Teller acuity cards"
+              },
+              "localizedDescriptions" : {
+                "en" : "Teller acuity cards were used."
+              }
+            }, {
+              "value" : "at0476",
+              "label" : "Cardiff acuity test",
+              "localizedLabels" : {
+                "en" : "Cardiff acuity test"
+              },
+              "localizedDescriptions" : {
+                "en" : "The cardiff acuity test was used."
+              }
+            }, {
+              "value" : "at0483",
+              "label" : "Allen picture test.",
+              "localizedLabels" : {
+                "en" : "Allen picture test."
+              },
+              "localizedDescriptions" : {
+                "en" : "The allen picture test was used."
+              }
+            }, {
+              "value" : "at0484",
+              "label" : "Sheridan letter test.",
+              "localizedLabels" : {
+                "en" : "Sheridan letter test."
+              },
+              "localizedDescriptions" : {
+                "en" : "The sheridian letter test was ued."
+              }
+            }, {
+              "value" : "at0485",
+              "label" : "Cambridge crowding cards",
+              "localizedLabels" : {
+                "en" : "Cambridge crowding cards"
+              },
+              "localizedDescriptions" : {
+                "en" : "Cambridge crowding cards were used."
+              }
+            }, {
+              "value" : "at0486",
+              "label" : "MNREAD chart",
+              "localizedLabels" : {
+                "en" : "MNREAD chart"
+              },
+              "localizedDescriptions" : {
+                "en" : "A MNREAD acuity chart was used."
+              }
+            }, {
+              "value" : "at0487",
+              "label" : "Radner Reading Chart",
+              "localizedLabels" : {
+                "en" : "Radner Reading Chart"
+              },
+              "localizedDescriptions" : {
+                "en" : "A RADNER reading chart was used."
+              }
+            }, {
+              "value" : "at0488",
+              "label" : "Freiburg visual acuity test",
+              "localizedLabels" : {
+                "en" : "Freiburg visual acuity test"
+              },
+              "localizedDescriptions" : {
+                "en" : "The freiburg visual acuity test was used."
+              }
+            }, {
+              "value" : "at0489",
+              "label" : "Sheridan gardiner test",
+              "localizedLabels" : {
+                "en" : "Sheridan gardiner test"
+              },
+              "localizedDescriptions" : {
+                "en" : "The sheridan gardiner test was used."
+              }
+            }, {
+              "value" : "at0499",
+              "label" : "Sonksen silver test",
+              "localizedLabels" : {
+                "en" : "Sonksen silver test"
+              },
+              "localizedDescriptions" : {
+                "en" : "The Sonksen silver test was used"
+              }
+            } ],
+            "listOpen" : true
+          }, {
+            "suffix" : "other",
+            "type" : "TEXT"
+          } ]
+        }, {
+          "id" : "stimulus_device_details",
+          "name" : "Stimulus device details",
+          "localizedName" : "Stimulus device details",
+          "rmType" : "CLUSTER",
+          "nodeId" : "openEHR-EHR-CLUSTER.device.v1",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Stimulus device details"
+          },
+          "localizedDescriptions" : {
+            "en" : "An instrument, apparatus, implant, material or similar, used in the provision of healthcare. In this context, a medical device includes a broad range of devices which act through a variety of physical, mechanical, thermal or similar means but specifically excludes devices which act through medicinal means such as pharmacological, metabolic or immunological methods.  The scope is inclusive of disposable devices as well as durable or persisting devices that require tracking, maintenance activities or regular calibration, recognising that each type of device has specific data recording requirements."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[openEHR-EHR-CLUSTER.device.v1,'Stimulus device details']",
+          "children" : [ {
+            "id" : "device_name",
+            "name" : "Device name",
+            "localizedName" : "Device name",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0001",
+            "min" : 1,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Device name"
+            },
+            "localizedDescriptions" : {
+              "en" : "Identification of the medical device, preferably by a common name, a formal fully descriptive name or, if required, by class or category of device."
+            },
+            "annotations" : {
+              "comment" : "This data element will capture the term, phrase or category used in clinical practice. For example: <brand name><machine> (XYZ Audiometer); <size> <brand name> <intravenous catheter> (14G Jelco IV catheter); or <brand name/type> <implant>. Coding with a terminology is desirable, where possible, although this may be local and depending on local supplies available.\r\n"
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[openEHR-EHR-CLUSTER.device.v1,'Stimulus device details']/items[at0001]/value",
+            "inputs" : [ {
+              "type" : "TEXT"
+            } ]
+          }, {
+            "id" : "manufacturer",
+            "name" : "Manufacturer",
+            "localizedName" : "Manufacturer",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0004",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Manufacturer"
+            },
+            "localizedDescriptions" : {
+              "en" : "Name of manufacturer."
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[openEHR-EHR-CLUSTER.device.v1,'Stimulus device details']/items[at0004]/value",
+            "inputs" : [ {
+              "type" : "TEXT"
+            } ]
+          } ]
+        }, {
+          "id" : "optotype",
+          "name" : "Optotype",
+          "localizedName" : "Optotype",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0021",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Optotype"
+          },
+          "localizedDescriptions" : {
+            "en" : "The type of visual acuity chart symbol used to assess visual acuity."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0021]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0108",
+              "label" : "Pictogramm",
+              "localizedLabels" : {
+                "en" : "Pictogramm"
+              },
+              "localizedDescriptions" : {
+                "en" : "Picture optotypes were used."
+              }
+            }, {
+              "value" : "at0107",
+              "label" : "Orientation-Type Optotypes",
+              "localizedLabels" : {
+                "en" : "Orientation-Type Optotypes"
+              },
+              "localizedDescriptions" : {
+                "en" : "Orientation-Type optotypes were used."
+              }
+            }, {
+              "value" : "at0106",
+              "label" : "Letters",
+              "localizedLabels" : {
+                "en" : "Letters"
+              },
+              "localizedDescriptions" : {
+                "en" : "Letter optotypes were used."
+              }
+            }, {
+              "value" : "at0206",
+              "label" : "Lea Symbol",
+              "localizedLabels" : {
+                "en" : "Lea Symbol"
+              },
+              "localizedDescriptions" : {
+                "en" : "Lea Symbol  optotypes were used."
+              }
+            }, {
+              "value" : "at0207",
+              "label" : "Kay Picture",
+              "localizedLabels" : {
+                "en" : "Kay Picture"
+              },
+              "localizedDescriptions" : {
+                "en" : "Kay Picture  optotypes were used."
+              }
+            }, {
+              "value" : "at0208",
+              "label" : "Allen Picture",
+              "localizedLabels" : {
+                "en" : "Allen Picture"
+              },
+              "localizedDescriptions" : {
+                "en" : "Allen Picture  optotypes were used."
+              }
+            }, {
+              "value" : "at0209",
+              "label" : "Auckland",
+              "localizedLabels" : {
+                "en" : "Auckland"
+              },
+              "localizedDescriptions" : {
+                "en" : "Auckland  optotypes were used."
+              }
+            }, {
+              "value" : "at0210",
+              "label" : "Amsterdam Picture",
+              "localizedLabels" : {
+                "en" : "Amsterdam Picture"
+              },
+              "localizedDescriptions" : {
+                "en" : "Amsterdam Picture  optotypes were used."
+              }
+            }, {
+              "value" : "at0211",
+              "label" : "Landolt C",
+              "localizedLabels" : {
+                "en" : "Landolt C"
+              },
+              "localizedDescriptions" : {
+                "en" : "Landolt C optotypes were used."
+              }
+            }, {
+              "value" : "at0212",
+              "label" : "Tumbling E",
+              "localizedLabels" : {
+                "en" : "Tumbling E"
+              },
+              "localizedDescriptions" : {
+                "en" : "Tumbling E optotypes were used."
+              }
+            }, {
+              "value" : "at0213",
+              "label" : "Numbers",
+              "localizedLabels" : {
+                "en" : "Numbers"
+              },
+              "localizedDescriptions" : {
+                "en" : "Number optotypes were used."
+              }
+            }, {
+              "value" : "at0214",
+              "label" : "Precision Vision Numbers",
+              "localizedLabels" : {
+                "en" : "Precision Vision Numbers"
+              },
+              "localizedDescriptions" : {
+                "en" : "Precision Vision Number optotypes were used."
+              }
+            }, {
+              "value" : "at0215",
+              "label" : "Lea Numbers",
+              "localizedLabels" : {
+                "en" : "Lea Numbers"
+              },
+              "localizedDescriptions" : {
+                "en" : "Lea Number optotypes were used."
+              }
+            }, {
+              "value" : "at0216",
+              "label" : "Sloan Letters",
+              "localizedLabels" : {
+                "en" : "Sloan Letters"
+              },
+              "localizedDescriptions" : {
+                "en" : "Sloan Letter optotypes were used."
+              }
+            }, {
+              "value" : "at0217",
+              "label" : "Cyrillic Letters",
+              "localizedLabels" : {
+                "en" : "Cyrillic Letters"
+              },
+              "localizedDescriptions" : {
+                "en" : "Cyrillic Letter optotypes were used."
+              }
+            }, {
+              "value" : "at0218",
+              "label" : "Snellen Letters",
+              "localizedLabels" : {
+                "en" : "Snellen Letters"
+              },
+              "localizedDescriptions" : {
+                "en" : "Snellen Letter optotypes were used."
+              }
+            }, {
+              "value" : "at0219",
+              "label" : "HOTV Letters",
+              "localizedLabels" : {
+                "en" : "HOTV Letters"
+              },
+              "localizedDescriptions" : {
+                "en" : "HOTV Letter optotypes were used."
+              }
+            }, {
+              "value" : "at0220",
+              "label" : "LRVC Letters",
+              "localizedLabels" : {
+                "en" : "LRVC Letters"
+              },
+              "localizedDescriptions" : {
+                "en" : "LRVC Letter optotypes were used."
+              }
+            }, {
+              "value" : "at0221",
+              "label" : "British Letters (2003)",
+              "localizedLabels" : {
+                "en" : "British Letters (2003)"
+              },
+              "localizedDescriptions" : {
+                "en" : "British Letter (2003) optotypes were used."
+              }
+            }, {
+              "value" : "at0222",
+              "label" : "European-wide letters",
+              "localizedLabels" : {
+                "en" : "European-wide letters"
+              },
+              "localizedDescriptions" : {
+                "en" : "European-wide letter optotypes were used."
+              }
+            } ]
+          } ]
+        }, {
+          "id" : "optotype_presentation",
+          "name" : "Optotype presentation",
+          "localizedName" : "Optotype presentation",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0252",
+          "min" : 0,
+          "max" : -1,
+          "localizedNames" : {
+            "en" : "Optotype presentation"
+          },
+          "localizedDescriptions" : {
+            "en" : "Modifications of how optotypes are displayed"
+          },
+          "annotations" : {
+            "comment" : "Differentiating crowded from uncrowded optotypes is especially relevant in children and those with a suspicion of Amblyopia."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0252]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0253",
+              "label" : "Single Optotype Presentation",
+              "localizedLabels" : {
+                "en" : "Single Optotype Presentation"
+              },
+              "localizedDescriptions" : {
+                "en" : "A single optotype at a time was displayed."
+              }
+            }, {
+              "value" : "at0254",
+              "label" : "Crowded Optotype Presentation",
+              "localizedLabels" : {
+                "en" : "Crowded Optotype Presentation"
+              },
+              "localizedDescriptions" : {
+                "en" : "Crowded optotypes were displayed."
+              }
+            }, {
+              "value" : "at0261",
+              "label" : "Line Optotype Presentation",
+              "localizedLabels" : {
+                "en" : "Line Optotype Presentation"
+              },
+              "localizedDescriptions" : {
+                "en" : "A whole line of optotypes of the same size were displayed at the same time."
+              }
+            }, {
+              "value" : "at0413",
+              "label" : "Uncrowded Optotype Presentation",
+              "localizedLabels" : {
+                "en" : "Uncrowded Optotype Presentation"
+              },
+              "localizedDescriptions" : {
+                "en" : "Uncrowded optotypes were displayed."
+              }
+            } ]
+          } ]
+        }, {
+          "id" : "no_improvement_note",
+          "name" : "No improvement note",
+          "localizedName" : "No improvement note",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0415",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "No improvement note"
+          },
+          "localizedDescriptions" : {
+            "en" : "A note indicating that the addition of another type of aid did not result in a better test result. "
+          },
+          "annotations" : {
+            "comment" : "Used where a determination of the visual acuity with the additional aid was not deemed sufficiently important to warrant being performed. "
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0415]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0416",
+              "label" : "No improvement with additional pinhole",
+              "localizedLabels" : {
+                "en" : "No improvement with additional pinhole"
+              },
+              "localizedDescriptions" : {
+                "en" : "No improvement  beyond the recorded result was noted after addition of a pinhole."
+              }
+            }, {
+              "value" : "at0417",
+              "label" : "No Improvement with subjective refraction-based correction",
+              "localizedLabels" : {
+                "en" : "No Improvement with subjective refraction-based correction"
+              },
+              "localizedDescriptions" : {
+                "en" : "No improvement beyond the recorded result was noted using corrective lenses based on subjective refraction."
+              }
+            }, {
+              "value" : "at0494",
+              "label" : "No improvement with autorefraction-based correction",
+              "localizedLabels" : {
+                "en" : "No improvement with autorefraction-based correction"
+              },
+              "localizedDescriptions" : {
+                "en" : "No improvement beyond the recorded result was noted after addition of corrective lenses based on an autorefraction test."
+              }
+            }, {
+              "value" : "at0497",
+              "label" : "No Improvement with retinoscopy-based correction",
+              "localizedLabels" : {
+                "en" : "No Improvement with retinoscopy-based correction"
+              },
+              "localizedDescriptions" : {
+                "en" : "No improvement beyond the recorded result was noted after addition of corrective lenses based on retinoscopy."
+              }
+            }, {
+              "value" : "at0495",
+              "label" : "No Improvement with glasses",
+              "localizedLabels" : {
+                "en" : "No Improvement with glasses"
+              },
+              "localizedDescriptions" : {
+                "en" : "No improvement beyond the recorded result was noted after the addition of corrective glasses."
+              }
+            }, {
+              "value" : "at0496",
+              "label" : "No improvement with soft contact lens",
+              "localizedLabels" : {
+                "en" : "No improvement with soft contact lens"
+              },
+              "localizedDescriptions" : {
+                "en" : "No improvement beyond the recorded result was noted after the addition of a soft contact lens."
+              }
+            }, {
+              "value" : "at0498",
+              "label" : "No improvement with rigid contact lens",
+              "localizedLabels" : {
+                "en" : "No improvement with rigid contact lens"
+              },
+              "localizedDescriptions" : {
+                "en" : "No improvement beyond the recorded result was noted after the addition of a rigid or hard contact lens"
+              }
+            } ],
+            "listOpen" : true
+          }, {
+            "suffix" : "other",
+            "type" : "TEXT"
+          } ]
+        }, {
+          "id" : "comment",
+          "name" : "Comment",
+          "localizedName" : "Comment",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0040",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Comment"
+          },
+          "localizedDescriptions" : {
+            "en" : "Narrative comment about the visual acuity test."
+          },
+          "annotations" : {
+            "comment" : "It is a common but controversial practice to comment \"partial\" where the last line was not read entirely even in line-based scoring. This is covered by the \"Letters missed or read in addition to scored line\" element. "
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0040]/value",
+          "inputs" : [ {
+            "type" : "TEXT",
+            "listOpen" : true
+          }, {
+            "suffix" : "other",
+            "type" : "TEXT"
+          } ],
+          "termBindings" : {
+            "SNOMED-CT" : {
+              "value" : "[SNOMED-CT::117364006]",
+              "terminologyId" : "SNOMED-CT"
+            }
+          }
+        }, {
+          "id" : "interpretation",
+          "name" : "Interpretation",
+          "localizedName" : "Interpretation",
+          "rmType" : "DV_TEXT",
+          "nodeId" : "at0333",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Interpretation"
+          },
+          "localizedDescriptions" : {
+            "en" : "Interpretation of the results."
+          },
+          "annotations" : {
+            "comment" : "Not to be used for information about how the test was performed or patient circumstances affecting result."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0333]/value",
+          "inputs" : [ {
+            "type" : "TEXT",
+            "listOpen" : true
+          }, {
+            "suffix" : "other",
+            "type" : "TEXT"
+          } ]
+        }, {
+          "id" : "comparative_classification",
+          "name" : "Comparative classification",
+          "localizedName" : "Comparative classification",
+          "rmType" : "DV_CODED_TEXT",
+          "nodeId" : "at0370",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Comparative classification"
+          },
+          "localizedDescriptions" : {
+            "en" : "Classification of the test and its result as \"best\" corrected or \"best\" recorded visual acuity, or both."
+          },
+          "annotations" : {
+            "comment" : "There is significant variation to how these terms are definied in different settings.  These classifiers do not contain information on the actual correction used, which can be recorded within the right/left aid position clusters. "
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[at0370]/value",
+          "inputs" : [ {
+            "suffix" : "code",
+            "type" : "CODED_TEXT",
+            "list" : [ {
+              "value" : "at0371",
+              "label" : "BCVA",
+              "localizedLabels" : {
+                "en" : "BCVA"
+              },
+              "localizedDescriptions" : {
+                "en" : "This result is classified as a Best Corrected Visual Acuity."
+              }
+            }, {
+              "value" : "at0372",
+              "label" : "BRVA",
+              "localizedLabels" : {
+                "en" : "BRVA"
+              },
+              "localizedDescriptions" : {
+                "en" : "This result is classified as a Best Recorded Visual Acuity."
+              }
+            } ]
+          } ]
+        }, {
+          "id" : "exclusion_of_examination",
+          "name" : "Exclusion of examination",
+          "localizedName" : "Exclusion of examination",
+          "rmType" : "CLUSTER",
+          "nodeId" : "openEHR-EHR-CLUSTER.exclusion_exam.v1",
+          "min" : 0,
+          "max" : 1,
+          "localizedNames" : {
+            "en" : "Exclusion of examination"
+          },
+          "localizedDescriptions" : {
+            "en" : "Positive statement to record that a physical examination or clinical test was not performed."
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[openEHR-EHR-CLUSTER.exclusion_exam.v1]",
+          "children" : [ {
+            "id" : "examination_not_done",
+            "name" : "Examination not done",
+            "localizedName" : "Examination not done",
+            "rmType" : "DV_BOOLEAN",
+            "nodeId" : "at0001",
+            "min" : 1,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Examination not done"
+            },
+            "localizedDescriptions" : {
+              "en" : "Statement to explicity record that the examination was not performed."
+            },
+            "annotations" : {
+              "comment" : "Record as True if the examination was not performed."
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[openEHR-EHR-CLUSTER.exclusion_exam.v1]/items[at0001]/value",
+            "inputs" : [ {
+              "type" : "BOOLEAN",
+              "list" : [ {
+                "value" : "true",
+                "label" : "true"
+              } ]
+            } ]
+          }, {
+            "id" : "reason",
+            "name" : "Reason",
+            "localizedName" : "Reason",
+            "rmType" : "DV_TEXT",
+            "nodeId" : "at0002",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Reason"
+            },
+            "localizedDescriptions" : {
+              "en" : "Reason for the 'not done' statement."
+            },
+            "annotations" : {
+              "comment" : "For example: patient factors, equipment factors, time constraints."
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/data[at0003]/items[openEHR-EHR-CLUSTER.exclusion_exam.v1]/items[at0002]/value",
+            "inputs" : [ {
+              "type" : "TEXT",
+              "list" : [ {
+                "value" : "No improvement over other test.",
+                "label" : "No improvement over other test."
+              } ],
+              "listOpen" : true
+            } ]
+          } ]
+        }, {
+          "id" : "aid_by_eye",
+          "name" : "Aid by eye",
+          "localizedName" : "Aid by eye",
+          "rmType" : "CLUSTER",
+          "nodeId" : "at0262",
+          "min" : 0,
+          "max" : -1,
+          "dependsOn" : [ "chart_or_card_type", "stimulus_device_details", "testing_distance", "optotype_presentation", "letters_missed_in_or_read_in_addition_to_scored_line", "stimulus_display_method", "no_improvement_note", "comparative_classification", "result", "interpretation", "eye_examined", "optotype", "testing_distance_category", "comment", "exclusion_of_examination" ],
+          "localizedNames" : {
+            "en" : "Aid by eye"
+          },
+          "localizedDescriptions" : {
+            "en" : "A cluster describing what type of visual aid was used during the test, and which eye it was positioned in front of. \n"
+          },
+          "annotations" : {
+            "comment" : "Where multiple devices are positioned in front of the same eye, this cluster ist expected to be used once for each. Example: Pinhole occluder and phoropter lenses being used at the same time. "
+          },
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]",
+          "children" : [ {
+            "id" : "in_front_of_which_eye",
+            "name" : "In front of which eye",
+            "localizedName" : "In front of which eye",
+            "rmType" : "DV_CODED_TEXT",
+            "nodeId" : "at0405",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "In front of which eye"
+            },
+            "localizedDescriptions" : {
+              "en" : "The eye in front of which the aid device or correction, such as an arrangement of trial lenses, own glasses, contact lenses, pinhole occluders are positioned."
+            },
+            "annotations" : {
+              "comment" : "For monocular tests where the partner eye is fully occluded, this can be \"The eye being tested\". There may be exceptions, such as when the eye that is not being tested explicitely has a fogging lens in front of it to blur, but not block all vision. In binocular tests, this element is expected to occur once with \"right eye\" and once with \"left eye\" for each aid placed in front of the eyes. \n"
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]/items[at0405]/value",
+            "inputs" : [ {
+              "suffix" : "code",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0012",
+                "label" : "Left eye",
+                "localizedLabels" : {
+                  "en" : "Left eye"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The left eye was examined."
+                },
+                "termBindings" : {
+                  "SNOMED-CT" : {
+                    "value" : "[SNOMED-CT::726675003]",
+                    "terminologyId" : "SNOMED-CT"
+                  }
+                }
+              }, {
+                "value" : "at0013",
+                "label" : "Right eye",
+                "localizedLabels" : {
+                  "en" : "Right eye"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The right eye was examined."
+                },
+                "termBindings" : {
+                  "SNOMED-CT" : {
+                    "value" : "[SNOMED-CT::726680007]",
+                    "terminologyId" : "SNOMED-CT"
+                  }
+                }
+              }, {
+                "value" : "at0409",
+                "label" : "The eye being tested",
+                "localizedLabels" : {
+                  "en" : "The eye being tested"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The aid was in front of the eye being tested. For monocular test where the other eye is occluded, this is the default value."
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "type_of_aid",
+            "name" : "Type of aid",
+            "localizedName" : "Type of aid",
+            "rmType" : "DV_CODED_TEXT",
+            "nodeId" : "at0373",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Type of aid"
+            },
+            "localizedDescriptions" : {
+              "en" : "The type of lens or object that is positioned in front of one of the eyes.\n"
+            },
+            "annotations" : {
+              "comment" : "Which eye it is in front of depends on the value of the \"In front of which eye\" element.\nNote that this is not exclusive of devices that are not corrective, such as defocus or fogging lenses. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]/items[at0373]/value",
+            "inputs" : [ {
+              "suffix" : "code",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0374",
+                "label" : "Autorefraction-based correction",
+                "localizedLabels" : {
+                  "en" : "Autorefraction-based correction"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A correction with powers based on an autorefraction test."
+                }
+              }, {
+                "value" : "at0375",
+                "label" : "Subjective refraction-based correction",
+                "localizedLabels" : {
+                  "en" : "Subjective refraction-based correction"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A correction with powers based on a subjective refraction."
+                }
+              }, {
+                "value" : "at0376",
+                "label" : "Glasses",
+                "localizedLabels" : {
+                  "en" : "Glasses"
+                },
+                "localizedDescriptions" : {
+                  "en" : "Glasses were used as an aid."
+                }
+              }, {
+                "value" : "at0377",
+                "label" : "Rigid contact lens",
+                "localizedLabels" : {
+                  "en" : "Rigid contact lens"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A rigid contact lens correciton was used. Sometimes called hard contact lens."
+                }
+              }, {
+                "value" : "at0378",
+                "label" : "Soft contact lens",
+                "localizedLabels" : {
+                  "en" : "Soft contact lens"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A soft contact lens."
+                }
+              }, {
+                "value" : "at0381",
+                "label" : "Retinoscopy based correction",
+                "localizedLabels" : {
+                  "en" : "Retinoscopy based correction"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A Correction with values based on retinoscopy."
+                }
+              }, {
+                "value" : "at0382",
+                "label" : "Corrected",
+                "localizedLabels" : {
+                  "en" : "Corrected"
+                },
+                "localizedDescriptions" : {
+                  "en" : "Lenses without a specific origin of the values were used."
+                }
+              }, {
+                "value" : "at0383",
+                "label" : "Fogging lens",
+                "localizedLabels" : {
+                  "en" : "Fogging lens"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A Lens used to intentionally blur the vision in that eye."
+                },
+                "termBindings" : {
+                  "SNOMED-CT" : {
+                    "value" : "[SNOMED-CT::362508001]",
+                    "terminologyId" : "SNOMED-CT"
+                  }
+                }
+              }, {
+                "value" : "at0384",
+                "label" : "Pinhole occluder",
+                "localizedLabels" : {
+                  "en" : "Pinhole occluder"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A pinhole occluder was used which is a device with small holes that act as apertures. Sometimes used together with lenses."
+                }
+              }, {
+                "value" : "at0385",
+                "label" : "Subjective overrefraction-based correction",
+                "localizedLabels" : {
+                  "en" : "Subjective overrefraction-based correction"
+                },
+                "localizedDescriptions" : {
+                  "en" : "A correction with values based on subjective overrefraction was used."
+                }
+              }, {
+                "value" : "at0386",
+                "label" : "Unaided",
+                "localizedLabels" : {
+                  "en" : "Unaided"
+                },
+                "localizedDescriptions" : {
+                  "en" : "There is explicitely nothing in front of the eye during the visual acuity testing."
+                }
+              } ],
+              "listOpen" : true
+            }, {
+              "suffix" : "other",
+              "type" : "TEXT"
+            } ]
+          }, {
+            "id" : "cycloplegia_state",
+            "name" : "Cycloplegia state",
+            "localizedName" : "Cycloplegia state",
+            "rmType" : "DV_CODED_TEXT",
+            "nodeId" : "at0500",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Cycloplegia state"
+            },
+            "localizedDescriptions" : {
+              "en" : "A note of whether the correction used was based on a measurement of the refractive error in a cycloplegic state. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]/items[at0500]/value",
+            "inputs" : [ {
+              "suffix" : "code",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "at0501",
+                "label" : "Cycloplegic refraction",
+                "localizedLabels" : {
+                  "en" : "Cycloplegic refraction"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The correction used was based on a measurement of refractive error in a cycloplegic state."
+                }
+              }, {
+                "value" : "at0502",
+                "label" : "Non-cycloplegic refraction",
+                "localizedLabels" : {
+                  "en" : "Non-cycloplegic refraction"
+                },
+                "localizedDescriptions" : {
+                  "en" : "The correction used was based on a measurement of refractive error in a non-cycloplegic state."
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "power_of_sphere",
+            "name" : "Power of sphere",
+            "localizedName" : "Power of sphere",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0464",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Power of sphere"
+            },
+            "localizedDescriptions" : {
+              "en" : "The refractive power that is equal in all meridians, used as the base correction upon which cylinder and axis are applied."
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]/items[at0464]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL",
+              "validation" : {
+                "range" : {
+                  "minOp" : ">=",
+                  "min" : -100.0,
+                  "maxOp" : "<=",
+                  "max" : 100.0
+                },
+                "precision" : {
+                  "minOp" : ">=",
+                  "min" : 2,
+                  "maxOp" : "<=",
+                  "max" : 2
+                }
+              }
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "dioptre",
+                "label" : "dioptre",
+                "validation" : {
+                  "range" : {
+                    "minOp" : ">=",
+                    "min" : -100.0,
+                    "maxOp" : "<=",
+                    "max" : 100.0
+                  },
+                  "precision" : {
+                    "minOp" : ">=",
+                    "min" : 2,
+                    "maxOp" : "<=",
+                    "max" : 2
+                  }
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "power_of_cylinder",
+            "name" : "Power of cylinder",
+            "localizedName" : "Power of cylinder",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0466",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Power of cylinder"
+            },
+            "localizedDescriptions" : {
+              "en" : "The refractive power added to the spherical correction at the meridian 90° from the cylinder axis to compensate for astigmatism."
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]/items[at0466]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL",
+              "validation" : {
+                "range" : {
+                  "minOp" : ">=",
+                  "min" : -100.0,
+                  "maxOp" : "<=",
+                  "max" : 100.0
+                },
+                "precision" : {
+                  "minOp" : ">=",
+                  "min" : 2,
+                  "maxOp" : "<=",
+                  "max" : 2
+                }
+              }
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "dioptre",
+                "label" : "dioptre",
+                "validation" : {
+                  "range" : {
+                    "minOp" : ">=",
+                    "min" : -100.0,
+                    "maxOp" : "<=",
+                    "max" : 100.0
+                  },
+                  "precision" : {
+                    "minOp" : ">=",
+                    "min" : 2,
+                    "maxOp" : "<=",
+                    "max" : 2
+                  }
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "axis_of_cylinder",
+            "name" : "Axis of cylinder",
+            "localizedName" : "Axis of cylinder",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0467",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Axis of cylinder"
+            },
+            "localizedDescriptions" : {
+              "en" : "The orientation of the cylinder, defining the meridian of zero power, with maximum cylindrical power occurring 90° from this position."
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]/items[at0467]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL",
+              "validation" : {
+                "range" : {
+                  "minOp" : ">=",
+                  "min" : 0.0,
+                  "maxOp" : "<=",
+                  "max" : 180.0
+                },
+                "precision" : {
+                  "minOp" : ">=",
+                  "min" : 1,
+                  "maxOp" : "<=",
+                  "max" : 1
+                }
+              }
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "°",
+                "label" : "°",
+                "validation" : {
+                  "range" : {
+                    "minOp" : ">=",
+                    "min" : 0.0,
+                    "maxOp" : "<=",
+                    "max" : 180.0
+                  },
+                  "precision" : {
+                    "minOp" : ">=",
+                    "min" : 1,
+                    "maxOp" : "<=",
+                    "max" : 1
+                  }
+                }
+              } ]
+            } ]
+          }, {
+            "id" : "near_addition",
+            "name" : "Near addition",
+            "localizedName" : "Near addition",
+            "rmType" : "DV_QUANTITY",
+            "nodeId" : "at0468",
+            "min" : 0,
+            "max" : 1,
+            "localizedNames" : {
+              "en" : "Near addition"
+            },
+            "localizedDescriptions" : {
+              "en" : "The additional spherical lens power for near vision. "
+            },
+            "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/state[at0041]/items[at0262]/items[at0468]/value",
+            "inputs" : [ {
+              "suffix" : "magnitude",
+              "type" : "DECIMAL"
+            }, {
+              "suffix" : "unit",
+              "type" : "CODED_TEXT",
+              "list" : [ {
+                "value" : "[diop]",
+                "label" : "[diop]",
+                "localizedLabels" : {
+                  "en" : "dioptre"
+                }
+              } ]
+            } ]
+          } ],
+          "termBindings" : {
+            "LOINC" : {
+              "value" : "[LOINC::29073-4]",
+              "terminologyId" : "LOINC"
+            }
+          }
+        }, {
+          "id" : "time",
+          "name" : "Time",
+          "rmType" : "DV_DATE_TIME",
+          "min" : 1,
+          "max" : 1,
+          "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/data[at0001]/events[at0134]/time",
+          "inputs" : [ {
+            "type" : "DATETIME"
+          } ],
+          "inContext" : true
+        } ]
+      }, {
+        "id" : "language",
+        "name" : "Language",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/language",
+        "inContext" : true
+      }, {
+        "id" : "encoding",
+        "name" : "Encoding",
+        "rmType" : "CODE_PHRASE",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/encoding",
+        "inContext" : true
+      }, {
+        "id" : "subject",
+        "name" : "Subject",
+        "rmType" : "PARTY_PROXY",
+        "min" : 1,
+        "max" : 1,
+        "aqlPath" : "/content[openEHR-EHR-OBSERVATION.visual_acuity.v0]/subject",
+        "inputs" : [ {
+          "suffix" : "id",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_scheme",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "id_namespace",
+          "type" : "TEXT"
+        }, {
+          "suffix" : "name",
+          "type" : "TEXT"
+        } ],
+        "inContext" : true
+      } ]
+    }, {
+      "id" : "category",
+      "rmType" : "DV_CODED_TEXT",
+      "nodeId" : "",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/category",
+      "inputs" : [ {
+        "suffix" : "code",
+        "type" : "CODED_TEXT",
+        "list" : [ {
+          "value" : "433",
+          "label" : "event",
+          "localizedLabels" : {
+            "en" : "event"
+          }
+        } ],
+        "terminology" : "openehr"
+      } ],
+      "inContext" : true
+    }, {
+      "id" : "language",
+      "name" : "Language",
+      "rmType" : "CODE_PHRASE",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/language",
+      "inContext" : true
+    }, {
+      "id" : "territory",
+      "name" : "Territory",
+      "rmType" : "CODE_PHRASE",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/territory",
+      "inContext" : true
+    }, {
+      "id" : "composer",
+      "name" : "Composer",
+      "rmType" : "PARTY_PROXY",
+      "min" : 1,
+      "max" : 1,
+      "aqlPath" : "/composer",
+      "inputs" : [ {
+        "suffix" : "id",
+        "type" : "TEXT"
+      }, {
+        "suffix" : "id_scheme",
+        "type" : "TEXT"
+      }, {
+        "suffix" : "id_namespace",
+        "type" : "TEXT"
+      }, {
+        "suffix" : "name",
+        "type" : "TEXT"
+      } ],
+      "inContext" : true
+    } ]
+  }
+}
