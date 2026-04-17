@@ -1,5 +1,5 @@
 let
-    Quelle = Json.Document(File.Contents("C:\Users\Beep Beep\Downloads\vamappingtemplate (1).json")),
+    Quelle = Json.Document(File.Contents("put path here")),
     Tree = Quelle[tree],
 
     FlattenTree = (current_node as record, current_path as text) as table =>
