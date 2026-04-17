@@ -1,0 +1,72 @@
+let
+    Quelle = Json.Document(Web.Contents("=LEFT(CELL(“filename”);FIND(“[“;CELL(“filename”))-1)&”vamappingtemplate.json”")),
+    Tree = Quelle[tree],
+
+    FlattenTree = (current_node as record, current_path as text) as table =>
+        let
+            // 1. Core Metadata
+            MinOcc = Record.FieldOrDefault(current_node, "min", 0),
+            MaxOcc = Record.FieldOrDefault(current_node, "max", 1),
+            IsMultiple = if MaxOcc = -1 or MaxOcc > 1 then true else false,
+            AtCode = Record.FieldOrDefault(current_node, "nodeId", ""),
+            RMType = current_node[rmType],
+            
+            // 2. Path Logic (with :0 index for multiples)
+            NodeId = current_node[id],
+            IndexedId = if IsMultiple then NodeId & ":0" else NodeId,
+            NewPath = if current_path = "" then IndexedId else current_path & "/" & IndexedId,
+            
+            // 3. Clinical Name
+            NodeName = if Record.HasFields(current_node, "localizedName") then current_node[localizedName] 
+                       else if Record.HasFields(current_node, "name") then current_node[name] 
+                       else NodeId,
+            
+            // 4. Spec-Specific Attribute Expansion based on RM Type
+            AttributeList = 
+                if RMType = "DV_CODED_TEXT" then 
+                    {
+                        [Path = NewPath & "|code", Type = RMType],
+                        [Path = NewPath & "|value", Type = RMType],
+                        [Path = NewPath & "|terminology", Type = RMType]
+                    }
+                else if RMType = "DV_QUANTITY" then
+                    {
+                        [Path = NewPath & "|magnitude", Type = RMType],
+                        [Path = NewPath & "|unit", Type = RMType]
+                    }
+                else if RMType = "DV_COUNT" or RMType = "DV_INTEGER" or RMType = "DV_DATE_TIME" then
+                    {
+                        [Path = NewPath, Type = RMType]
+                    }
+                else 
+                    {}, // Structural nodes (CLUSTER, etc.) don't get attributes directly
+
+            AttributeTable = if List.IsEmpty(AttributeList) then #table({},{}) else Table.FromRecords(AttributeList),
+
+            // 5. Structural Row (The "Parent" entry)
+            CurrentRow = #table(
+                {"Path", "Node_Name", "at_Code", "Type", "Max_Occ"}, 
+                {{NewPath, NodeName, AtCode, RMType, if MaxOcc = -1 then "Unbounded" else Text.From(MaxOcc)}}
+            ),
+
+            // 6. Enrich Attribute Table
+            FinalAttributeTable = if Table.IsEmpty(AttributeTable) then #table({},{}) else
+                let
+                    AddedName = Table.AddColumn(AttributeTable, "Node_Name", each NodeName),
+                    AddedAt = Table.AddColumn(AddedName, "at_Code", each AtCode),
+                    AddedMax = Table.AddColumn(AddedAt, "Max_Occ", each if MaxOcc = -1 then "Unbounded" else Text.From(MaxOcc)),
+                    Selected = Table.SelectColumns(AddedMax, {"Path", "Node_Name", "at_Code", "Type", "Max_Occ"})
+                in
+                    Selected,
+
+            // 7. Combine & Recurse
+            NodeContent = if Table.IsEmpty(FinalAttributeTable) then CurrentRow else Table.Combine({CurrentRow, FinalAttributeTable}),
+            Children = if Record.HasFields(current_node, "children") then current_node[children] else {},
+            ChildTables = List.Transform(Children, each @FlattenTree(_, NewPath)),
+            Combined = Table.Combine({NodeContent} & ChildTables)
+        in
+            Combined,
+
+    FinalTable = FlattenTree(Tree, "")
+in
+    FinalTable
